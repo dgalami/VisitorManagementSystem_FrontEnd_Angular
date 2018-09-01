@@ -1,0 +1,95 @@
+<div class="container-fluid content-wrapper">
+      <div class="side-wrapper">
+            <!-- <sidebar-nav></sidebar-nav> -->
+            <div id="sidebar-wrapper">
+                  <div id="logo-banner">
+                        <div class="logo">
+                              <a class="simple-text" href="#">
+                                    <span class="logo-img">
+                                          <i class="fas fa-home"></i>
+                                    </span>
+                                    VISITOR LOG
+                              </a>
+                        </div>
+                  </div>
+                  <ul class="nav flex-column mb-2" id="sideNavebar">
+                        <li class="nav-item">
+                              <a class="nav-link selected" [routerLink]="['dashboard']" >
+                                    <span><i class="fas fa-tachometer-alt"></i></span>
+                                    <span>Dashboard</span>
+                              </a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link active" [routerLink]="['currentStatus']" >
+                                    <span><i class="fab fa-gg-circle"></i></span>
+                                    <span>Current Status</span>
+                              </a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" [routerLink]="['visitor']">
+                                    <span><i class="fas fa-asterisk"></i></span>
+                                    <span>Visitor</span>
+                              </a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" [routerLink]="['appointment']" >
+                                    <span><i class="fas fa-calendar-check"></i></span>
+                                    <span>Appointment</span>
+                              </a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" [routerLink]="['employee']">
+                                    <span><i class="fas fa-chart-line"></i></span>
+                                    <span>Employee</span>
+                              </a>
+                        </li>
+                        <li class="nav-item">
+                              <a class="nav-link" [routerLink]="['Reports']">
+                                    <span><i class="fas fa-database"></i></span>
+                                    <span>Reports</span>
+                              </a>
+                        </li>
+
+                  </ul>
+            </div>
+      </div>
+      <div class="main-wrapper">
+            <!-- <navigation-bar></navigation-bar> -->
+            <div id="navbar-wrapper" class="container-fluid">
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed">
+                        <a class="navbar-brand" href="#">Dashboard</a>
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                  
+                              <ul class="nav navbar-nav ml-auto">
+                                    <li>
+                                          <a class="nav-item nav-link active">{{employee.email}}</a>
+                                    </li>
+                                   <li>
+                                     <a class="nav-item nav-link" href="#">
+                                          Log Out <i class="fas fa-sign-out-alt"></i>
+                                     </a>
+                                   </li> 
+                              </ul>
+                        </div>
+                  </nav>
+            </div>
+
+            <div class="page-wrapper">
+                  <router-outlet></router-outlet>
+            </div>
+
+            <!-- <footer-bar></footer-bar> -->
+            <footer class="footer">
+                        <div class="container">
+                            <span class="text-muted">©<strong> 2018 ShortPoint. All rights reserved.</strong></span>
+                            <span class="social-icon">
+                                <i class="fab fa-facebook-square"></i>
+                                <i class="fab fa-youtube"></i>
+                                <i class="fab fa-linkedin"></i>
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                    </footer>
+
+      </div>
+</div>

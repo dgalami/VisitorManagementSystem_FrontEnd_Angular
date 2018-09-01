@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <div class="chart-div">
+        <table>
+            <tr>
+                <td style="width: 500px;height:50%;"><canvas id="lineChart"></canvas></td>
+                <td style="width: 500px;height:50%;"><canvas id="barChart"></canvas></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="current-logged-div">
+        <p>Visitor Logged In</p>
+    
+        <!-- //card -->
+        <div class="card text-white" *ngFor="let logIn of LoggedInVisitor">
+            <div class="card-body card1-div">
+                <div class="row">
+                        <div class="col">
+                            <p><img src="/src/assets/images/pic1.jpg" alt="Avatar" class="avatar"></p>
+                        </div>
+                    <div class="col align-middle">
+                            <h5>Logged Time</h5>
+                            <p>{{logIn.logInTime}}</p>
+                    </div>
+                    <div class="col align-middle">
+                            <h5>Visitor Name</h5>
+                            <p>{{logIn.visitor.firstName}} {{logIn.visitor.lastName}}</p>
+                    </div>
+                    <div class="col align-middle">
+                            <h5>Employee Name</h5>
+                            <p>{{logIn.employee.firstName}} {{logIn.employee.lastName}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+
+
+
+    </div>
+    <div class="expected-div">
+        <p>Expected Visitors</p>
+        <!-- card1 -->
+        <div class="card text-white bg-success" *ngFor="let expected of ExpectedVisitor">
+            <div class="card-body card2-div">
+                <div class="row">
+
+                    <div class="col-4">
+                        <p>{{expected.logDate}} <br> {{expected.logInTime}}</p>
+                    </div>
+                    <div class="col-4">
+                        <p>{{expected.visitor.firstName}} {{expected.visitor.lastName}}</p>
+                    </div>
+                    <div class="col-4">
+                        <p>{{expected.employee.firstName}} {{expected.employee.lastName}}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end card1 -->
+
+        <!-- card1
+        <div class="card text-white bg-success">
+                <div class="card-body" id="card2-div">
+                    <div class="row">
+    
+                        <div class="col-4">
+                            Date and Time
+                        </div>
+                        <div class="col-4">
+                            Visitor name
+                        </div>
+                        <div class="col-4">
+                            Employee name
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+             end card1 -->
+
+    </div>
+</div>

@@ -1,0 +1,245 @@
+<div class="container">
+  <br/>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <form class="card card-sm">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
+          </div>
+          <!--end of col-->
+          <div class="col">
+            <input class="form-control form-control-lg form-control-borderless" id="input-search" type="search" placeholder="Search Employee">
+          </div>
+          <!--end of col-->
+          <div class="col-auto">
+            <button class="btn btn-lg btn-success" type="submit">Search</button>
+          </div>
+          <!--end of col-->
+        </div>
+      </form>
+    </div>
+    <!--end of col-->
+  </div>
+
+  <div id="add-div">
+    <a class="badge badge-primary">Add New</a>
+  </div>
+
+  <div class="row justify-content-center" id="table-div">
+    <table class="table table-hover" id="employee-table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone No</th>
+        </tr>
+      </thead>
+
+      <tbody id="data-table">
+        <tr data-toggle="modal" data-target="#mymodal" *ngFor="let emp of employees; let i = index" (click)="onSelect(emp)">
+          <th scope="row">{{i}}</th>
+          <td>{{emp.firstName}}</td>
+          <td>{{emp.lastName}}</td>
+          <td>{{emp.email}}</td>
+          <td>{{emp.phone}}</td>
+          <!-- <button type="button" (click)="onSelect(emp)"></button><i class="far fa-eye"></i></button> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- update modal update and delete  -->
+
+ <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+        <div class="modal-header justify-content-center">
+            <h3>Display image here</h3>
+          </div>
+
+       <!-- modal body  -->
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+
+            <!-- //display error message -->
+    <div [class.d-none]="!displayMessage" class=" alert alert-success col-10" *ngIf="isUpdate || isDeleted">
+      <small>{{message}}</small>
+    </div>
+    <div [class.d-none]="!displayErrorMessage" class="alert alert-danger col-10" *ngIf="!isDeleted || !isUpdate">
+      <small>{{errorMessage}}</small>
+    </div>
+  
+            <form #updateDeleteForm="ngForm">
+
+                <div class="form-group d-none">
+                    <div class="col-10">
+                      <input type="text" [(ngModel)]="rowEmployee.eId" name="eId" class="form-control">
+                    </div>
+                  </div>
+
+              <div class="form-group">
+                <label for="firstName" class="col-2 col-form-label">First Name</label>
+                <div class="col-10">
+                  <input type="text" #fName="ngModel" [class.is-invalid]="fName.invalid && fName.touched" [(ngModel)]="rowEmployee.firstName" name="firstName" class="form-control" required>
+                  <small class="text-danger" [class.d-none]="fName.valid || fName.untouched">First Name is required</small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="lastName" class="col-2 col-form-label">Last Name</label>
+                <div class="col-10">
+                  <input type="text" #lName="ngModel" [class.is-invalid]="lName.invalid && lName.touched" [(ngModel)]="rowEmployee.lastName" name="lastName" class="form-control" required>
+                  <small class="text-danger" [class.d-none]="lName.valid || lName.untouched">Last Name is required</small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="col-2 col-form-label">Email</label>
+                <div class="col-10">
+                  <input type="email" #emailId="ngModel" [class.is-invalid]="emailId.invalid && emailId.touched" [(ngModel)]="rowEmployee.email" name="email" class="form-control" required>
+                  <small class="text-danger" [class.d-none]="emailId.valid || emailId.untouched">Email is required</small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="telephone" class="col-2 col-form-label">Telephone</label>
+                <div class="col-10">
+                  <input type="text" #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched" 
+                  pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" 
+                  [(ngModel)]="rowEmployee.phone" name="telephone" placeholder="800-555-1234 or 800.555.1234" 
+                  class="form-control" required>
+                  <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">phone is required and must be 10 digits number</small>
+                </div>
+                
+              </div>
+
+              <!-- <div class="form-group">
+                <label for="password" class="col-2 col-form-label">Password</label>
+                <div class="col-10">
+                  <input type="password" #pswd="ngModel" [class.is-invalid]="pswd.invalid && pswd.touched" [(ngModel)]="tableEmployee.password" name="password" id="password" class="form-control" required>
+                  <small class="text-danger" [class.d-none]="pswd.valid || pswd.untouched">Password is required</small>
+                </div>
+              </div> -->
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <!-- end of modal body  -->
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="updateEmployee()">Update</button>
+        <button type="button" class="btn btn-danger" (click)="deleteEmployee()">Delete</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeBtn()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+ <!-- Add new modal  -->
+
+ <div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+ data-backdrop="false">
+ <div class="modal-dialog modal-lg">
+   <div class="modal-content">
+
+     <div class="modal-header justify-content-center">
+       <h3>Display image here</h3>
+     </div>
+
+     
+   <!-- modal body  -->
+     <div class="modal-body">
+       <div class="card">
+         <div class="card-body">
+
+           <div class="alert alert-danger col-10" *ngIf="employeeExist">
+             Employee already exist!!
+           </div>
+           <div class="alert alert-success col-10" *ngIf="isadded">
+             Congratulations: Employee added successfully!!
+           </div>
+
+           <form #addNewEmployeeForm="ngForm">
+
+              <div class="form-group d-none">
+                  <div class="col-10">
+                    <input type="text" [(ngModel)]="employee.eId" name="employeeId" class="form-control">
+                  </div>
+                </div>
+
+               <div class="form-group">
+                 <label for="firstName" class="col-2 col-form-label">First Name</label>
+                 <div class="col-10">
+                   <input type="text" #fn="ngModel" [class.is-invalid]="fn.invalid && fn.touched" [(ngModel)]="employee.firstName" name="firstName" class="form-control" required>
+                   <small class="text-danger" [class.d-none]="fn.valid || fn.untouched">First Name is required</small>
+                   <small class="text-danger" *ngIf="employeeError.firstName">{{employeeError.firstName}}</small>
+                 </div>
+                </div>
+               <div class="form-group">
+                 <label for="lastName" class="col-2 col-form-label">Last Name</label>
+                 <div class="col-10">
+                   <input type="text" #ln="ngModel" [class.is-invalid]="ln.invalid && ln.touched" [(ngModel)]="employee.lastName" name="lastName" class="form-control" required>
+                   <small class="text-danger" [class.d-none]="ln.valid || ln.untouched">Last Name is required</small>
+                   <small class="text-danger" *ngIf="employeeError.lastName">{{employeeError.lastName}}</small>
+                 </div>
+               </div>
+ 
+               <div class="form-group">
+                 <label for="email" class="col-2 col-form-label">Email</label>
+                 <div class="col-10">
+                   <input type="email" #eml="ngModel" [class.is-invalid]="eml.invalid && eml.touched" [(ngModel)]="employee.email" name="email"  class="form-control" required>
+                   <small class="text-danger" [class.d-none]="eml.valid || eml.untouched">Email is required</small>
+                   <small class="text-danger" *ngIf="employeeError.email">{{employeeError.email}}</small>
+                 </div>
+               </div>
+ 
+               <div class="form-group">
+                 <label for="telephone" class="col-2 col-form-label">Telephone</label>
+                 <div class="col-10">
+                   <input type="text" #phoneNo="ngModel" [class.is-invalid]="phoneNo.invalid && phoneNo.touched" 
+                   pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$" 
+                   [(ngModel)]="employee.phone" name="telephone" placeholder="800-555-1234 or 800.555.1234" 
+                   class="form-control" required>
+                   <small class="text-danger" [class.d-none]="phoneNo.valid || phoneNo.untouched">phone is required and must be 10 digits number</small>
+                   <small class="text-danger" *ngIf="employeeError.phone">{{employeeError.phone}}</small>
+                 </div>
+                 
+               </div>
+ 
+               <div class="form-group">
+                 <label for="password" class="col-2 col-form-label">Password</label>
+                 <div class="col-10">
+                   <input type="password" #pswd="ngModel" [class.is-invalid]="pswd.invalid && pswd.touched" [(ngModel)]="employee.password" name="password" class="form-control" required>
+                   <small class="text-danger" [class.d-none]="pswd.valid || pswd.untouched">Password is required</small>
+                   <small class="text-danger" *ngIf="employeeError.password">{{employeeError.password}}</small>
+                 </div>
+               </div>
+             </form>
+
+         </div>
+       </div>
+     </div>
+     <!-- end of modal body  -->
+
+     <div class="modal-footer">
+       <button type="button" [disabled]="addNewEmployeeForm.form.invalid" class="btn btn-success" (click)="addNewEmployee(addNewEmployeeForm)">Save</button>
+       <button type="button" class="btn btn-info" data-dismiss="modal" (click)="getAllEmployee()">Close</button>
+     </div> 
+
+   </div>
+ </div>
+</div>

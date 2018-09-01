@@ -1,0 +1,194 @@
+<div class="container">
+  <br/>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <form class="card card-sm">
+        <div class="card-body row no-gutters align-items-center">
+          <div class="col-auto">
+            <i class="fas fa-search h4 text-body"></i>
+          </div>
+          <!--end of col-->
+          <div class="col">
+            <input class="form-control form-control-lg form-control-borderless" id="input-search" type="search" placeholder="Search Visitors">
+          </div>
+          <!--end of col-->
+          <div class="col-auto">
+            <button class="btn btn-lg btn-success" type="submit">Search</button>
+          </div>
+          <!--end of col-->
+        </div>
+      </form>
+    </div>
+    <!--end of col-->
+  </div>
+
+  <div id="add-div">
+    <a class="badge badge-primary">Add New</a>
+  </div>
+
+
+  <div class="row justify-content-center" id="table-div">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone No</th>
+          <th scope="col">Company</th>
+        </tr>
+      </thead>
+
+      <tbody id="data-table">
+        <tr data-toggle="modal" data-target="#mymodal" *ngFor="let visitor of visitors; let i = index" (click)="onSelect(visitor)">
+          <th scope="row">{{i}}</th>
+          <td>{{ visitor.firstName }}</td>
+          <td>{{ visitor.lastName }}</td>
+          <td>{{ visitor.email }}</td>
+          <td>{{ visitor.phone }}</td>
+          <td>{{ visitor.company }}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- update modal -->
+
+<div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header justify-content-center">
+        <h3>Display image here</h3>
+      </div>
+
+      <!-- modal body -->
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+
+            <!-- //display error message -->
+            <div [class.d-none]="!displayMessage" class=" alert alert-success col-10" >
+              <small>{{message}}</small>
+            </div>
+            <div [class.d-none]="!displayErrorMessage" class="alert alert-danger col-10">
+              <small>{{errorMessage}}</small>
+            </div>
+
+            <form #visitorUpdateDeleteForm="ngForm">
+
+              <div class="form-group d-none">
+                <input type="text" class="form-control" [(ngModel)]="rowVisitor.vId" name="vId">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="formFirstName">First Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="rowVisitor.firstName" id="formFirstName" name="vFn">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="formLastName">Last Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="rowVisitor.lastName" id="formLastName" name="vLn">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="formCompany">Company</label>
+                  <input type="text" class="form-control" [(ngModel)]="rowVisitor.company" id="formCompany" name="vCompany">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="formPhone">Phone No</label>
+                  <input type="text" class="form-control" [(ngModel)]="rowVisitor.phone" id="formPhone" name="vPhone">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="formEmail">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="rowVisitor.email" id="formEmail" name="vEmail">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- end of modal body -->
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="updateVisitor()">Update</button>
+        <button type="button" class="btn btn-danger" (click)="deleteVisitor()">Delete</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeBtn()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Add new modal -->
+
+<div class="modal fade" id="addmodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header justify-content-center">
+        <h3>Display image here</h3>
+      </div>
+
+      <!-- modal body -->
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+
+              <div class="alert alert-danger col-10" *ngIf="employeeExist">
+                  Visitor already exist!!
+                </div>
+                <div class="alert alert-success col-10" *ngIf="isadded">
+                  Congratulations: Visitor added successfully!!
+                </div>
+
+            <form>
+              <div class="form-row">
+                  <div class="form-group d-none">
+                      <input type="text" class="form-control" [(ngModel)]="addVisitor.vId" name="visitorId">
+                    </div>
+
+                <div class="form-group col-md-6">
+                  <label for="formFirstName">First Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="addVisitor.firstName" id="formFirstName" name="visitorFName">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="formLastName">Last Name</label>
+                  <input type="text" class="form-control" [(ngModel)]="addVisitor.lastName" id="formLastName" name="visitorLName">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="formCompany">Company</label>
+                  <input type="text" class="form-control" [(ngModel)]="addVisitor.company" id="formCompany" name="visitorCompany">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="formPhone">Phone No</label>
+                  <input type="text" class="form-control" [(ngModel)]="addVisitor.phone" id="formPhone" name="visitorPhone">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="formEmail">Email</label>
+                <input type="text" class="form-control" [(ngModel)]="addVisitor.email" id="formEmail" name="visitorEmail">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- end of modal body -->
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="addNewVisitor()">Save</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal" (click)="closeBtn()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

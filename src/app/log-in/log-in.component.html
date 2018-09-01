@@ -1,0 +1,36 @@
+
+<div class="modal-dialog text-center" *ngIf="!isLoggedIn">
+  <div class="col-sm-9 main-section">
+    <div class="modal-content">
+
+      <div class="col-12 user-img">
+          <img src="/src/assets/images/user-face.png">
+      </div>
+      <div class="col-12 form-input">
+      
+          
+          <div class="form-group">
+              <i class="fas fa-at"></i>
+            <input [(ngModel)]="employee.email" #email="ngModel" pattern="^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$" [class.is-invalid]="email.invalid && email.touched" class="form-control is-invalid" type="email" placeholder="Enter Email" name="email" required> 
+          </div>
+    
+          <div class="form-group">
+              <i class="fas fa-lock"></i> 
+              <!-- Password should be at least 8 characters long and should contain one number,one character and one special character. -->
+              <input [(ngModel)]="employee.password" #password="ngModel" [class.is-invalid]="password.invalid && password.touched" class="form-control is-invalid" type="password" placeholder="Enter Password" name="password" required>
+          </div>
+          <div class="form-group text text-danger" *ngIf="!isValidate">
+            <span>{{errorMessage}}</span>
+          </div>
+          
+          <button type="submit" class="btn btn-success" (click)="onLoginClick()">Login</button>
+      
+      </div>
+      <div class="forgot">
+        <a href="#">Forgot Password?</a>
+      </div>
+
+    </div>  <!-- end of modal modal-content -->
+  </div>
+
+</div>

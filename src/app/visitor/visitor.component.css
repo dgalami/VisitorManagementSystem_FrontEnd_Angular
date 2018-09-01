@@ -1,0 +1,40 @@
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+#table-div{
+    margin-top: 10px;
+}
+#add-div{
+    position: absolute;
+    top:159px;
+    right: 30px;
+    color: white;
+    transition: .5s ease;
+
+}
+#add-div:hover{
+    box-shadow:
+    1px 1px #373737,
+    2px 2px #373737,
+    3px 3px #373737,
+    4px 4px #373737,
+    5px 5px #373737,
+    6px 6px #373737;
+    -webkit-transform: translateX(-3px);
+    transform: translateX(-3px);
+    transition: .5s ease;
+    }
+#data-table tr{
+    cursor: pointer;
+}
+
+
+tr:nth-child(even) {
+    background-color: #B7EACC;
+}

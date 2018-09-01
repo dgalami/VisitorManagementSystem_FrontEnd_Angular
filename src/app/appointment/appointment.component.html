@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="card" id="AddAppointment-div">
+    <div class="card-body">
+      <h5 class="card-title">Add New Appointment</h5>
+  
+      <div>
+        <!-- //select visitor -->
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Choose Visitor</label>
+         <ng-multiselect-dropdown [placeholder]="'Choose Visitor'" [data]="dropdownList" [(ngModel)]="newAppointment.visitorsId" [settings]="dropdownSettings"
+            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [ngModelOptions]="{standalone: true}">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <!-- //get visitor email address -->
+        <!-- <div class="form-group">
+          <label for="exampleFormControlInput1">Email address</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div> -->
+
+        <!-- //select employee -->
+        <div class="form-group">
+          <label for="visitor-select">Select Employee</label>
+            <select id="employee-list" class="form-control" [(ngModel)]="newAppointment.eId" name="vSelect">
+              <option value="" disabled selected>Select...</option>
+              <option *ngFor="let emp of employees" [ngValue]="emp.eId">
+                {{emp.firstName}} {{emp.lastName}}
+              </option>
+            </select>
+        </div>
+        <!-- //date picker -->
+        <div class="form-group">
+            <label for="appointment-date">Date</label>
+            <input [(ngModel)]="newAppointment.logDate" name="appointmentdate" type="date" class="form-control"> 
+        </div>
+
+        <!-- //time picker -->
+        <div class="form-group">
+            <label for="appointment-time">Time</label>
+            <input [(ngModel)]="newAppointment.logInTime" name="appointmenttime" type="time" class="form-control"> 
+        </div>
+       
+
+        <!-- //Reason -->
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Reason</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="newAppointment.reason"></textarea>
+        </div>
+
+
+        <input type="submit" class="btn btn-success" value="Submit" (click)="addNewAppointment()">
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <div class="card" id="listAppointment-div">
+    <div class="card-body">
+      <h5 class="card-title">List of Appointment</h5>
+
+      <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Visitor Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Employee</th>
+              <th scope="col">Reason</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="logList">
+            <tr *ngFor="let logged of expectedAppointment; let i = index">
+              <th scope="row">{{i}}</th>
+              <td>{{logged.visitor.firstName}} {{logged.visitor.lastName}}</td>
+              <td>{{logged.logDate}}</td>
+              <td>{{logged.logInTime}}</td>
+              <td>{{logged.employee.firstName}} {{logged.employee.lastName}}</td>
+              <td>{{logged.reason}}</td>
+              <td><button class="btn btn-danger" (click)="deleteAppointment(logged.logId)"><i class="far fa-trash-alt"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+
+    </div>
+  </div>
+</div>

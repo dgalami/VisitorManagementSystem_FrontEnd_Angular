@@ -1,0 +1,12 @@
+.container-fluid{
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+#AddAppointment-div{
+    flex: 1;
+    margin-right: 10px;
+}
+#listAppointment-div{
+    flex: 2.5;
+}
