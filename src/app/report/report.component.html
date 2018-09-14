@@ -1,0 +1,67 @@
+<div class="container">
+
+    <div id="content-div">
+        <div class="row">
+          <div class="col col-2">
+              <input style="width:150px;padding-left: 5px;" type="date" name="from" [(ngModel)]="dateFrom">          
+          </div>
+          <div class="col col-2">
+              <input type="date" name="to" style="width:150px; padding-left: 5px;" [(ngModel)]="dateTo">
+          </div>
+          <div class="col col-3">
+              <select #selectVisit (change)="setVId(selectVisit.value)" id="employee-list" class="form-control" name="vSelect">
+                  <option value="" selected>Select Visitor...</option>
+                  <option *ngFor="let visit of vList" [value]="visit.vId">
+                      {{visit.firstName}} {{visit.lastName}}
+                  </option>
+              </select>
+          </div>
+          <div class="col col-3">
+              <select #selectEmp (change)="setEId(selectEmp.value)" id="employee-list" class="form-control" name="eSelect">
+                  <option value="" selected>Select Employee...</option>
+                  <option *ngFor="let emp of eList" [value]="emp.eId">
+                    {{emp.firstName}} {{emp.lastName}}
+                  </option>
+              </select>
+            </div>
+          <div>
+            <button style="width:100px;" class="btn btn-success" (click)="display()">Display</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container" id="body-div">
+        <div class="alert alert-info text-center" *ngIf="isNotFound">
+          <p>No Record Found!</p>
+        </div>
+        <div id="table-div" *ngIf="logVisitor"> 
+          <table class="table table-bordered">
+              <thead>
+                <tr style="background-color:#C3E0F3;">
+                  <th scope="col">#</th>
+                  <th scope="col">Visitor Name</th>
+                  <th scope="col">Logged Date</th>
+                  <th scope="col">Time In</th>
+                  <th scope="col">Time Out</th>
+                  <th scope="col">Employee Name</th>
+                </tr>
+              </thead>
+              <tbody id="data-table">
+                <tr  *ngFor="let log of logVisitor; let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{log.visitor.firstName}} {{log.visitor.lastName}}</td>
+                  <td>{{log.logDate}}</td>
+                  <td>{{log.logInTime}}</td>
+                  <td>{{log.logOutTime}}</td>
+                  <td>{{log.employee.firstName}} {{log.employee.lastName}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <button style="float: right; margin-left: -50%;"  class="btn btn-secondary" (click)="downloadToPDF()">Download</button>
+          </div>
+      </div>
+
+
+
+</div>

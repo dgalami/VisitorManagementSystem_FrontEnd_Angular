@@ -127,8 +127,6 @@ export class AppointmentComponent implements OnInit {
 
 
   addNewAppointment(){
-    console.log(this.newAppointment);
-    console.log(this.newAppointment.reason);
     this.newAppointment.checkedIn = false;
     this.appointmentService.addNewAppointment(this.newAppointment)
      .subscribe(data=> {

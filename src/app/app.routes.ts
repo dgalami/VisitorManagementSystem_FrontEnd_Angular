@@ -10,6 +10,7 @@ import { AuthGuard } from './auth.guard';
 import { EmployeeComponent } from './employee/employee.component';
 import { VisitorComponent } from './visitor/visitor.component';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { ReportComponent } from './report/report.component';
 
 export const routes:Routes = [
     {path: '', redirectTo: 'login', pathMatch:'full'},
@@ -25,6 +26,7 @@ export const routes:Routes = [
             {path: "visitor", component:VisitorComponent},
             {path: "employee", component:EmployeeComponent},
             {path: "appointment", component: AppointmentComponent},
+            {path: "report", component: ReportComponent},
         ]
     },
     

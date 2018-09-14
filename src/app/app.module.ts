@@ -23,6 +23,10 @@ import { VisitorService } from './visitor/visitor.service';
 import { AppointmentService } from './appointment/appointment.service';
 import { CurrentStatusService } from './currentStatus/currentStatus.service';
 import { DashboardService } from './dashboard/dashboard.service';
+import { ReportComponent } from './report/report.component';
+import { ReportService } from './report/report.service';
+import { DatePipe } from '@angular/common';
+
 
 
 @NgModule({
@@ -35,7 +39,8 @@ import { DashboardService } from './dashboard/dashboard.service';
     HomeComponent,
     EmployeeComponent,
     VisitorComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    ReportComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -52,7 +57,9 @@ import { DashboardService } from './dashboard/dashboard.service';
     VisitorService, 
     AppointmentService,
     CurrentStatusService,
-    DashboardService
+    DashboardService,
+    ReportService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

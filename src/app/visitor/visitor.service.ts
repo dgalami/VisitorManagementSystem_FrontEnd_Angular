@@ -24,7 +24,7 @@ export class VisitorService implements OnInit{
 
     //get by id
     public getVisitorById(id: number):Observable<Visitor>{
-       return this.http.get<Visitor>("http://localhost:8080/visitor/fidById" + "/" + id, this.httpheader).pipe(
+       return this.http.get<Visitor>("http://localhost:8080/visitor/findById" + "/" + id, this.httpheader).pipe(
         catchError(this.errorHandler));
     }
 
